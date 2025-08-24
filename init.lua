@@ -966,9 +966,13 @@ require('lazy').setup({
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
-        return '%2l:%-2v'
+        return '%p%%%l/%L≡℅%-2v'
       end
+      -- statusline.section_git = function()
+      --   return '%{FugitiveStatusline()}'
+      -- end
 
+      require('mini.comment').setup()
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
