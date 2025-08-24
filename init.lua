@@ -968,11 +968,16 @@ require('lazy').setup({
       statusline.section_location = function()
         return '%p%%%l/%L≡℅%-2v'
       end
+      --- Uncomment to enable Fugitive git status
       -- statusline.section_git = function()
       --   return '%{FugitiveStatusline()}'
       -- end
 
+      --- Add shortcut to comment code <g-c>
       require('mini.comment').setup()
+
+      --- Move lines of code
+      require('mini.move').setup()
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
