@@ -969,8 +969,32 @@ require('lazy').setup({
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%p%%%l/%L≡℅%-2v'
+      statusline.section_location = function(args)
+        if statusline.is_truncated(args.trunc_width) then
+          return '%l:%2v'
+        end
+        return '%p%%%l/%L≡℅%-2{virtcol("$") - 1}'
+      end
+
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_filename = function(args)
+        -- In terminal always use plain name
+        if vim.bo.buftype == 'terminal' then
+          return '%t'
+        elseif statusline.is_truncated(args.trunc_width) then
+          -- File name with 'truncate', 'modified', 'readonly' flags
+          -- Use relative path if truncated
+          return '%f%m%r'
+        else
+          -- Use fullpath if not truncated
+          local treesitter_statusline = require('nvim-treesitter').statusline {
+            indicator_size = args.trunc_width,
+            type_patterns = { 'class', 'function', 'method' },
+            separator = '󰅂',
+          } or ''
+
+          return '%f%m%r' .. ' ' .. treesitter_statusline
+        end
       end
       --- Uncomment to enable Fugitive git status
       -- statusline.section_git = function()
