@@ -7,6 +7,6 @@ return {
   opts = {},
   handlers = {
     gitsigns = true,
-    hlslens = true,
+    search = true,
   },
 }
