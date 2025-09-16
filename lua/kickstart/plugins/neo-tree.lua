@@ -15,9 +15,17 @@ return {
   },
   opts = {
     filesystem = {
+      commands = {
+        open_in_default_app = function(state)
+          local node = state.tree:get_node()
+          local filepath = node:get_id()
+          vim.ui.open(vim.fn.expand(filepath))
+        end,
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',
+          ['go'] = 'open_in_default_app',
         },
       },
       filtered_items = {
