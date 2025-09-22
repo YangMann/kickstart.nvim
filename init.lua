@@ -261,7 +261,7 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-  'github/copilot.vim',
+  -- 'github/copilot.vim',
   -- Detect tabstop and shiftwidth automatically
   {
     'NMAC427/guess-indent.nvim',
@@ -883,8 +883,12 @@ require('lazy').setup({
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        per_filetype = {
+          org = { 'orgmode' },
+        },
         providers = {
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+          orgmode = { name = 'Orgmode', module = 'orgmode.org.autocompletion.blink', fallbacks = { 'buffer' } },
         },
       },
 

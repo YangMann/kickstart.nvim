@@ -4,7 +4,11 @@ return {
   lazy = false,
   ---@type snacks.Config
   opts = {
-    indent = {},
+    indent = {
+      animate = {
+        enabled = false,
+      },
+    },
     image = {},
     lazygit = {
       configure = true,
